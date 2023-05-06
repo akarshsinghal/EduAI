@@ -1,10 +1,7 @@
 from flask import Flask
 from pymongo import MongoClient
-<<<<<<< Updated upstream
 import cohere
-=======
 from flask_cors import CORS
->>>>>>> Stashed changes
 
 app = Flask(__name__)
 CORS(app)
