@@ -12,7 +12,7 @@ def test_db():
     insert_sample_data()
     return "hello, everything worked"
 
-@app.route("/register", methods=["POST"])
+@app.route("/register", methods=["GET","POST"])
 def register():
     data = request.get_json()
     username = data.get("username")
@@ -31,7 +31,7 @@ def register():
 
     return jsonify({"message": "Error occurred while registering user"}), 500
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET","POST"])
 def login():
     data = request.get_json()
     username = data.get("username")
