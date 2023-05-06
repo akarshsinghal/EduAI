@@ -1,23 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import LearnComponent from './components/LearnComponent';
+import ArticleDisplay from './components/ArticleDisplay';
+import ParticleAnimation from './components/ParticleAnimation';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column'}}>
+      <header style={{ backgroundColor: '#89CBF0', flex: '0 0 auto', color: '#FFFFFF', fontFamily: 'Quicksand, sans-serif', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <h1>Header</h1>
       </header>
+      <ParticleAnimation />
+      <ArticleDisplay />
+
     </div>
   );
 }
