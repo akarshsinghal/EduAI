@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../App.css';
 
-const App = () => {
+const Quiz = (props) => {
 
   const [selectedAnswers, setSelectedAnswers] = useState({});
+  console.log("this is quiz", props.topic)
+
 
   const questions = [
     {
@@ -82,4 +84,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Quiz;

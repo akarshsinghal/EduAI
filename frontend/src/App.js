@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Dashboard from "./mainComponents/Dashboard";
 import Register from "./mainComponents/Register";
-import QuizPage from "./components/QuizPage";
+
 
 function App() {
   const [username, setUsername] = useState("Valera");
