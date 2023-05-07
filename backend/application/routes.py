@@ -39,6 +39,7 @@ def login():
 
 @app.route("/dashboard", methods=["GET","POST"])
 def dash():
+    
     data = request.get_json()
     username = data.get("username")
     topic = data.get("topic")

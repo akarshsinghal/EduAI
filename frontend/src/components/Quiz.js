@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../App.css';
 
 const Quiz = (props) => {
 
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  console.log("this is quiz", props.topic)
+  const [questions, setQuestions] = useState([]);
 
+  
 
+  //useEffect to quesitons
+  //after submit clicked, get all Selected asnwers u had
+
+  /*
   const questions = [
     {
       questionText: 'Is the correct print statement in C equal to printf()',
@@ -30,7 +35,48 @@ const Quiz = (props) => {
         { answerText: 'No', isCorrect: false },
       ],
     },
-  ];
+  ];*/
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = JSON.stringify({
+          username: props.username,
+          topic: props.topic.UserAnswer,
+          difficulty: props.topic.difficulty,
+        });
+        const response = await axios.post(
+          'http://localhost:5000/dashboard',
+          data,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    };
+  
+    const fetchQuestions = async () => {
+      const data = await fetchData();
+      setQuestions(
+        data.map((jsonObj) => ({
+          questionText: jsonObj.questionText,
+          answerOptions: [
+            { answerText: 'Yes', isCorrect: true },
+            { answerText: 'No', isCorrect: false },
+          ],
+        }))
+      );
+    };
+  
+    fetchQuestions();
+  }, []);
+  
 
   const handleAnswer = (questionIndex, answerIndex) => {
     const updatedAns = { ...selectedAnswers, [questionIndex]: answerIndex };

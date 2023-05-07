@@ -6,7 +6,7 @@ import Register from "./mainComponents/Register";
 function App() {
   const [username, setUsername] = useState(null);
 
-  const componentToRender = username ? <Dashboard /> : <Register setUsername={(name) => setUsername(name)} />;
+  const componentToRender = username ? <Dashboard username={username} /> : <Register setUsername={(name) => setUsername(name)} />;
   console.log(componentToRender);
 
   return (
