@@ -1,6 +1,6 @@
 from flask import request, jsonify
-from application import app, user_db, prompt_db
-from application.helpers import create_user, check_user_credentials , create_prompt_stage_one
+from application import app, user_db, prompt_db 
+from application.helpers import create_user, check_user_credentials , create_prompt_stage_one , add_answers, generate_final
 
 
 @app.route("/register", methods=["GET","POST"])
@@ -54,4 +54,22 @@ def dash():
         return response
 
     return jsonify({"message": "Was unable to generate the questions"}), 400
+
+@app.route("/articleDisplay", methods=["GET","POST"])
+def article():
+    data = request.get_json()
+    username = data.get("username")
+    answers = data.get("answers")
+
+    if not all([username, answers]):
+        return jsonify({"message": "username, and answers are required!"}), 400
+    
+    prompt = add_answers(username, answers)
+    if prompt == None:
+        return jsonify({"message": "unable to add answers to the prompt database"}), 400
+    
+    article = generate_final(prompt)
+
+    return article
+
 

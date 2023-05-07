@@ -1,6 +1,5 @@
 from application import app, user_db, co, prompt_db
 import datetime
-from flask import jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 
 def create_user(username, password, age, occupation):
@@ -73,4 +72,32 @@ def add_answers(username, answers):
             continue
     return None
 
-#def generate_final(prompt):
+def generate_final(prompt1):
+    prompt_text = ("Write a 500 word informatory article about {} for a {} years old {} based on the interview answers: "
+                  "In an interview, they answered the following question:  {}. "
+                  "They gave the following answer: {}. "
+                  "In an interview, they answered the following question:  {}. "
+                  "They gave the following answer: {}. "
+                  "In an interview, they answered the following question:  {}. "
+                  "They gave the following answer: {}. "
+                  "In an interview, they answered the following question:  {}. "
+                  "They gave the following answer: {}. "
+                  "In an interview, they answered the following question:  {}. "
+                  "They gave the following answer: {}.").format(prompt1['topic'], prompt1['age'], prompt1['occupation'],
+                                                                 prompt1['questions'][0]["questionText"], prompt1['answers'][0],
+                                                                 prompt1['questions'][1]["questionText"], prompt1['answers'][1],
+                                                                 prompt1['questions'][2]["questionText"], prompt1['answers'][2],
+                                                                 prompt1['questions'][3]["questionText"], prompt1['answers'][3],
+                                                                 prompt1['questions'][4]["questionText"], prompt1['answers'][4])
+
+    response = co.generate(
+        model='6f384073-2801-4fa3-89e1-d66edc5e59ce-ft',
+        prompt=prompt_text,
+        max_tokens=1000,
+        temperature=0.9,
+        k=0,
+        stop_sequences=[],
+        return_likelihoods='NONE')
+
+    result = response.generations[0].text
+    return result

@@ -8,15 +8,14 @@ import Quiz from "../components/Quiz"
 export default function Dashboard(props) {
   const username = props.username
   const [topic, setTopic] = useState(null);
-  const [questionsAnswers, setQuestionsAnswers] = useState(null);
+  const [article, setArticle] = useState(null);
   const [articleDone, setArticleDone] = useState(false);
-  let contentToRender = topic ? <Quiz topic={topic} username={username} setQuestionsAnswers={(obj) => setQuestionsAnswers(obj)} /> : <LearnComponent setTopic={(obj) => setTopic(obj)} />;
+  let contentToRender = topic ? <Quiz topic={topic} username={username} setArticle={(obj) => setArticle(obj)} /> : <LearnComponent setTopic={(obj) => setTopic(obj)} />;
   console.log(topic)
-  console.log(questionsAnswers)
-  contentToRender = questionsAnswers ? <ArticleDisplay setArticleDone={(obj) => setArticleDone(obj)} questionAnswers={questionsAnswers}/> : contentToRender
+  contentToRender = article ? <ArticleDisplay setArticleDone={(obj) => setArticleDone(obj)} article={article}/> : contentToRender
   if (articleDone) {
     setTopic(null)
-    setQuestionsAnswers(null)
+    setArticle(null)
     setArticleDone(false)
   }
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import '../fonts/quicksand.css';
 
-const WebsitePage = () => {
+const WebsitePage = (props) => {
   const [showOverlay, setShowOverlay] = useState(false);
   const [liked, setLiked] = useState(null);
 
@@ -22,7 +22,7 @@ const WebsitePage = () => {
         <h2 style={{ backgroundColor: '#89CBF0', color: '#FFFFFF', borderRadius: '18px 18px 0 0', padding: '10px 20px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}>Retrieve Name</h2>
         <div style={{ display: 'flex', height: '80%' }}>
           <div style={{ width: '70%', overflowY: 'auto', padding: '20px', paddingRight: '10px', borderRight: '1px solid #CCCCCC' }}>
-            {/* Text Block */}
+            {props.article}
           </div>
           <div style={{ width: '30%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingLeft: '10px', paddingTop: "50px" }}>
             <div style={{ borderLeft: '1px solid #7F9B9E' }}></div> {/* Vertical grey line */}

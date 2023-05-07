@@ -84,17 +84,24 @@ const Quiz = (props) => {
   };
 
   const handleSubmit = async () => {
+    const convertedList  = Object.values(selectedAnswers).map( value => (value === 0 ? "Yes" : "No"))
+
     const data = {
-      selectedAnswers: selectedAnswers,
-    };
+      answers: convertedList,
+      username:props.username
+    }
 
     try {
-      const response = await axios.post('/submit-quiz', data, {
+      const response = await axios.post('http://localhost:5000/articleDisplay', data, {
         headers: {
           'Content-Type': 'application/json'
         }
       });
-      console.log(response.data);
+      const parsedData = response.data;
+
+    const article = parsedData;
+    console.log(article)
+      props.setArticle(article);
     } catch (error) {
       console.error(error);
     }
