@@ -44,8 +44,14 @@ const WebsitePage = (props) => {
         <p style={{ color: '#FFFFFF', textAlign: 'center', width: '80%', fontFamily: 'Quicksand' }}>You did not like the text. We'll improve it!</p>
       )}
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '15px' }}>
-        <button onClick={() => setShowOverlay(false)} style={{ width: '20%', height: "30px", fontSize: '1.2rem', borderRadius: '10px', border: 'none', backgroundColor: '#CEE1EC', marginRight: '10px', fontFamily: 'Quicksand' }}>Yes</button>
-        <button onClick={() => setShowOverlay(false)} style={{ width: '20%', height: "30px", fontSize: '1.2rem', borderRadius: '10px', border: 'none', backgroundColor: '#CEE1EC', marginLeft: '10px', fontFamily: 'Quicksand' }}>No</button>
+        <button onClick={() => {
+          setShowOverlay(false)
+          props.setArticleDone(true)
+          }} style={{ width: '20%', height: "30px", fontSize: '1.2rem', borderRadius: '10px', border: 'none', backgroundColor: '#CEE1EC', marginRight: '10px', fontFamily: 'Quicksand' }}>Yes</button>
+        <button onClick={() => {
+          setShowOverlay(false)
+          props.setArticleDone(true)
+          }} style={{ width: '20%', height: "30px", fontSize: '1.2rem', borderRadius: '10px', border: 'none', backgroundColor: '#CEE1EC', marginLeft: '10px', fontFamily: 'Quicksand' }}>No</button>
       </div>
     </div>
   </div>
