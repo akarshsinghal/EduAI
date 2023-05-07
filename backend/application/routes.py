@@ -1,16 +1,7 @@
 from flask import request, jsonify
-from application import app
-from application import user_db
-from application.helpers import create_user, check_user_credentials , insert_sample_data
+from application import app, user_db, prompt_db
+from application.helpers import create_user, check_user_credentials , create_prompt_stage_one
 
-@app.route("/")
-def index():
-    return "Hello world"
-
-@app.route("/test_db")
-def test_db():
-    insert_sample_data()
-    return "hello, everything worked"
 
 @app.route("/register", methods=["GET","POST"])
 def register():
@@ -45,3 +36,21 @@ def login():
         return jsonify({"message": "Logged in successfully"}), 200
 
     return jsonify({"message": "Invalid username or password"}), 401
+
+@app.route("/dashboard", methods=["GET","POST"])
+def dash():
+    data = request.get_json()
+    username = data.get("username")
+    topic = data.get("topic")
+    difficulty = data.get("difficulty")
+
+    if not all([username, topic, difficulty]):
+        return jsonify({"message": "username, topic and difficulty are required"}), 400
+
+    response = create_prompt_stage_one(username, topic, difficulty)
+
+    if response != None:
+        return response
+
+    return jsonify({"message": "Was unable to generate the questions"}), 400
+
