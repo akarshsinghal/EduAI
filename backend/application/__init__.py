@@ -7,9 +7,9 @@ app = Flask(__name__)
 CORS(app)
 app.config["SECRET_KEY"] = "ffa5538b7e176c8ddb4fe1fb39a2775dbe9e1643"
 
-cluster = "mongodb+srv://mykola:Qw121213@methacksprojectdb.s3vynya.mongodb.net/?retryWrites=true&w=majority"
+cluster = "mongodb+srv://user:JUHnPl4Ub4IVQn2w@methackscluster.qfvwt6z.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(cluster)
-user_db = client.MethacksApp
+user_db = client.db
 
 api_key = "p9xVIxwnJdbY7AkNBZ121U1ImJeMT80HKM5Jm1DZ"
 co = cohere.Client(api_key)
